@@ -1,0 +1,50 @@
+﻿@using Diana.Models;
+@model List<Products>
+@{
+    var count = 0;
+}
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Material</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Image</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    count++;
+                    <tr>
+                        <th scope="row">@count</th>
+                        <td>@item.Name</td>
+                        <td>@item.Category.Name</td>
+                        @foreach (var material in item.ProductMaterials)
+                        {
+                            <td>material.Material.MaterialName</td>
+                        }
+                        @foreach (var size in item.productSizes)
+                        {
+                            <td>size.Sizes.SizeName</td>
+
+                        }
+                        <td>@item.productSizes.</td>
+                    </tr>
+                }
+              
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+

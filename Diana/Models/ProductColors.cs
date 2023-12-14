@@ -2,7 +2,9 @@
 {
     public class ProductColors : BaseEntity
     {
-        public List<Products> Products { get; set; }
-        public List<Colors> Colors { get; set; }
+        public int ProductId { get; set; }
+        public Products Products { get; set; }
+        public int ColorId { get; set; }
+        public Colors Colors { get; set; }
     }
 }

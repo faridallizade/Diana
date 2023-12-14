@@ -2,7 +2,9 @@
 {
     public class ProductMaterial : BaseEntity
     {
-        public List<Material> Materials { get; set; }
-        public List<Products> Products { get; set; }
+        public int ProductId { get; set; }
+        public Products Products { get; set; }
+        public int MaterialId { get; set; }
+        public Material Material { get; set; }  
     }
 }

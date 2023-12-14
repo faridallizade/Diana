@@ -2,7 +2,9 @@
 {
     public class ProductSize : BaseEntity
     {
-        public List<Sizes> Sizes { get; set; }
-        public List<Products> Products { get; set; }
+        public int SizeId { get; set; }
+        public Sizes Sizes { get; set; }
+        public int ProductId { get; set; }
+        public Products Products { get; set; }
     }
 }
