@@ -5,6 +5,9 @@
 }
 <div class="container">
     <div class="row">
+                <div>
+                    <a class="btn btn-primary" asp-controller="Product" asp-action="Create">Create</a>
+                </div>
         <table class="table">
             <thead>
                 <tr>
@@ -15,7 +18,6 @@
                     <th scope="col">Size</th>
                     <th scope="col">Color</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Image</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -34,9 +36,16 @@
                         @foreach (var size in item.productSizes)
                         {
                             <td>size.Sizes.SizeName</td>
-
                         }
-                        <td>@item.productSizes.</td>
+                        @foreach (var color in item.ProductColors)
+                        {
+                            <td>color.Colors.ColorName</td>
+                        }
+                        <td>@item.Price</td>
+                        <td>
+                            <a class="btn btn-secondary" asp-controller="Product" asp-action="Update" asp-route-id="@item.Id">Update</a>
+                            <a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
                     </tr>
                 }
               
