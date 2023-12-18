@@ -11,9 +11,11 @@ namespace Diana.Areas.Admin.Controllers
     {
 
         AppDbContext _context;
-        public ProductController(AppDbContext context)
+        IWebHostEnvironment _env;
+        public ProductController(AppDbContext context,IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
         public async Task<IActionResult> Index()
         {
@@ -29,6 +31,45 @@ namespace Diana.Areas.Admin.Controllers
                 .ToListAsync();
 
             return View(product);
+        }
+
+
+        public async Task<IActionResult> Create()
+        {
+            List<Products> products = await _context.Products.ToListAsync();
+            return View(); 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(ProductVm productVm)
+        {
+            List<Products> products = await _context.Products.ToListAsync();
+            if (productVm is null)
+            {
+                return View("Error");
+            }
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            Products product = new Products()
+            {
+                Name = productVm.Name,
+                Description = productVm.Description,
+                ProductImages = new List<Images>()
+            };
+
+            Images image = new Images()
+            {
+                IsActive = true,
+                //ImgUrl = productVm.ProductImages.Upload(_env.WebRootPath, @"\Upload\Product\"),
+                Products = product,
+            };
+            TempData["Error"] = "";
+            product.ProductImages.Add(image);
+            await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Product");
         }
     }
 }
